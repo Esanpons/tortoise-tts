@@ -101,3 +101,70 @@ python tortoise/do_tts.py --text "Hola, esto es una prueba de Tortoise TTS." --v
 ```
 
 <br>
+
+## Paso 4: Configurar acceso remoto desde tu ordenador
+
+1. **Instalar `flask` para crear una API simple:**
+
+   ```sh
+   pip install flask
+   ```
+
+2. **Ir a la carpeta**
+
+   ```sh
+   cd tortoise-tts
+   ```
+
+3. **Crear Carpeta para la API**
+
+   ```sh
+   mkdir api_tortoise
+   cd api_tortoise
+   ```
+
+4. **Crear Carpeta para la API**
+
+   ```sh
+   nano app.py
+   ```
+
+5. **Añade el siguiente código:**
+
+   ```python
+   from flask import Flask, request, send_file
+   import subprocess
+
+   app = Flask(__name__)
+
+   @app.route('/synthesize', methods=['POST'])
+   def synthesize():
+       text = request.form['text']
+       output_file = 'output.wav'
+       subprocess.run(['python', 'tortoise/do_tts.py', '--text', text, '--voice', 'random', '--preset', 'fast', '--output_path', output_file])
+       return send_file(output_file, as_attachment=True)
+
+   if __name__ == '__main__':
+       app.run(host='0.0.0.0', port=5000)
+   ```
+
+6. **Guardar y salir del archivo**
+
+   Para guardar y salir del editor de texto Nano, puedes seguir estos pasos:
+
+   - Presiona `Ctrl + O` para guardar el archivo.
+   - Aparecerá una línea en la parte inferior de la pantalla donde puedes confirmar el nombre del archivo. Simplemente presiona `Enter` para confirmar el nombre actual del archivo (`app.py`).
+   - Luego, presiona `Ctrl + X` para salir de Nano.
+
+7. **Ejecutar el servidor Flask:**
+   ```sh
+   cd ~/tortoise-tts/api_tortoise
+   python app.py
+   ```
+
+### Paso 5: Enviar texto desde tu ordenador y obtener el audio
+
+1. **Enviar texto mediante `curl` desde tu ordenador:**
+   ```sh
+   curl -X POST -F "text=Hola, esto es una prueba de Tortoise TTS." http://34.125.122.189:5000/synthesize --output output.wav
+   ```
