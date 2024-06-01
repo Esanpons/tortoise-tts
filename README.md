@@ -3,6 +3,7 @@
 Tortoise TTS es una herramienta de síntesis de voz de código abierto desarrollada por [neonbjb](https://github.com/neonbjb). Utiliza modelos de lenguaje de última generación para convertir texto en voz de forma rápida y sencilla. Con Tortoise TTS, puedes generar voces humanas realistas en varios idiomas y estilos.
 
 <br>
+
 ## Paso 1: Crear una instancia de VM en Google Cloud
 
 1. Accede a Google Cloud Console: Ve a [Google Cloud Console](https://console.cloud.google.com/).
@@ -25,10 +26,14 @@ Tortoise TTS es una herramienta de síntesis de voz de código abierto desarroll
 
 5. Haz clic en Create.
 
+<br>
+
 ## Paso 2: Conectarse a la VM
 
 1. Conéctate mediante SSH:
    - Una vez creada la instancia, haz clic en SSH para conectarte a la VM desde el navegador.
+
+<br>
 
 ## Paso 3: Configurar el entorno en la VM
 
