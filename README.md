@@ -139,13 +139,13 @@ python tortoise/do_tts.py --text "Hola, esto es una prueba de Tortoise TTS." --v
 
    @app.route('/synthesize', methods=['POST'])
    def synthesize():
-       text = request.form['text']
-       output_file = 'output.wav'
-       subprocess.run(['python', 'tortoise/do_tts.py', '--text', text, '--voice', 'random', '--preset', 'fast', '--output_path', output_file])
-       return send_file(output_file, as_attachment=True)
+      text = request.form['text']
+      output_file = 'output.wav'
+      subprocess.run(['python3', 'tortoise/do_tts.py', '--text', text, '--voice', 'random', '--preset', 'fast', '--output_path', output_file])
+      return send_file(output_file, as_attachment=True)
 
    if __name__ == '__main__':
-       app.run(host='0.0.0.0', port=5000)
+      app.run(host='0.0.0.0', port=5000)
    ```
 
 6. **Guardar y salir del archivo**
@@ -159,12 +159,30 @@ python tortoise/do_tts.py --text "Hola, esto es una prueba de Tortoise TTS." --v
 7. **Ejecutar el servidor Flask:**
    ```sh
    cd ~/tortoise-tts/api_tortoise
-   python app.py
+   python3 app.py
    ```
 
-### Paso 5: Enviar texto desde tu ordenador y obtener el audio
+<br>
+
+## Paso 5: Activar todo cada vez que se entra
+
+1. **Activar entorno virtual:**
+
+   ```sh
+   source ~/tortoise-tts/venv/bin/activate
+   ```
+
+2. **Activar API flask**
+
+   ```sh
+   python3 ~/tortoise-tts/api_tortoise/app.py
+   ```
+
+<br>
+
+### Paso 6: Enviar texto desde tu ordenador y obtener el audio
 
 1. **Enviar texto mediante `curl` desde tu ordenador:**
    ```sh
-   curl -X POST -F "text=Hola, esto es una prueba de Tortoise TTS." http://34.125.122.189:5000/synthesize --output output.wav
+   curl -X POST -F "text=Hola, esto es una prueba de Tortoise TTS." http://34.125.77.15:5000/synthesize --output output.wav
    ```
